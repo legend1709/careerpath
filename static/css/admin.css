@@ -1,0 +1,347 @@
+.admin-section {
+    padding: 50px 20px;
+    background: #f9fafb;
+    min-height: 100vh;
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.admin-header h1 {
+    font-size: 32px;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.admin-header-actions {
+    display: flex;
+    gap: 15px;
+}
+
+/* ==================== STATS GRID ==================== */
+
+.admin-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.admin-stat-card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    display: flex;
+    gap: 20px;
+    transition: var(--transition);
+}
+
+.admin-stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.stat-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    border-radius: 12px;
+    background: var(--gradient-light);
+    color: var(--primary-color);
+    font-size: 32px;
+    flex-shrink: 0;
+}
+
+.stat-content h3 {
+    font-size: 28px;
+    color: var(--dark-color);
+    margin-bottom: 5px;
+}
+
+.stat-content p {
+    color: #6b7280;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.stat-content a {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+/* ==================== QUICK ACTIONS ==================== */
+
+.admin-quick-actions {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    margin-bottom: 50px;
+}
+
+.admin-quick-actions h2 {
+    font-size: 24px;
+    color: var(--dark-color);
+    margin-bottom: 30px;
+}
+
+.actions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.action-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    background: var(--gradient-light);
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.action-card:hover {
+    transform: translateY(-5px);
+    background: var(--gradient-primary);
+    color: white;
+    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.2);
+}
+
+.action-card i {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+/* ==================== TABLES ==================== */
+
+.table-responsive {
+    background: white;
+    border-radius: 12px;
+    overflow-x: auto;
+    box-shadow: var(--shadow);
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.admin-table thead {
+    background: var(--gradient-light);
+}
+
+.admin-table th {
+    padding: 20px;
+    text-align: left;
+    font-weight: 700;
+    color: var(--dark-color);
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.admin-table td {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 14px;
+}
+
+.admin-table tbody tr:hover {
+    background: #f9fafb;
+}
+
+.role-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.role-student {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.role-admin {
+    background: #fce7f3;
+    color: #831843;
+}
+
+.category-badge {
+    display: inline-block;
+    background: var(--gradient-light);
+    color: var(--primary-color);
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+/* ==================== CAREERS ADMIN ==================== */
+
+.careers-admin-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.career-admin-card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.career-admin-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.card-header h3 {
+    font-size: 18px;
+    color: var(--dark-color);
+}
+
+.career-description {
+    color: #6b7280;
+    font-size: 14px;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.card-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.card-actions .btn-sm {
+    flex: 1;
+}
+
+/* ==================== FORMS ==================== */
+
+.career-form {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    max-width: 700px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: var(--dark-color);
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.form-group small {
+    display: block;
+    margin-top: 5px;
+    color: #6b7280;
+    font-size: 12px;
+}
+
+.career-form button {
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .admin-header {
+        flex-direction: column;
+        gap: 20px;
+        align-items: flex-start;
+    }
+    
+    .admin-header-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+    
+    .admin-header-actions .btn {
+        width: 100%;
+    }
+    
+    .admin-stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .actions-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .careers-admin-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .admin-section {
+        padding: 20px 15px;
+    }
+    
+    .career-form {
+        padding: 20px;
+    }
+    
+    .actions-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .admin-table {
+        font-size: 12px;
+    }
+    
+    .admin-table th, .admin-table td {
+        padding: 12px;
+    }
+}

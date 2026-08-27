@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Assessment Results - CareerPath{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="results-section">
+    <div class="container">
+        <div class="results-header">
+            <h1>Your Career Recommendations</h1>
+            <p>Based on your assessment, here are the top 5 careers that match your profile</p>
+        </div>
+        
+        {% if recommendations %}
+        <div class="recommendations-list">
+            {% for rec in recommendations %}
+            <div class="recommendation-card">
+                <div class="rec-header">
+                    <div class="rec-icon">
+                        <i class="fas {{ rec['icon'] }}"></i>
+                    </div>
+                    <div class="rec-title-group">
+                        <h3>{{ rec['title'] }}</h3>
+                        <p class="rec-description">{{ rec['description'] }}</p>
+                    </div>
+                </div>
+                
+                <div class="rec-score">
+                    <div class="percentage-badge">
+                        <span class="percentage-value">{{ rec['percentage']|round(0)|int }}%</span>
+                        <span class="percentage-label">Match</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: {{ rec['percentage'] }}%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="rec-skills">
+                    <h4>Required Skills:</h4>
+                    {% set skills = rec['required_skills'].split(',') %}
+                    <div class="skills-list">
+                        {% for skill in skills[:5] %}
+                        <span class="skill-tag">{{ skill.strip() }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                <a href="{{ url_for('career_details', career_id=rec['career_id']) }}" class="btn btn-primary btn-sm">
+                    View Career Details <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <i class="fas fa-inbox"></i>
+            <h3>No Recommendations</h3>
+            <p>Please complete the assessment to get recommendations.</p>
+        </div>
+        {% endif %}
+        
+        <div class="results-actions">
+            <a href="{{ url_for('dashboard') }}" class="btn btn-outline">
+                <i class="fas fa-arrow-left"></i> Back to Dashboard
+            </a>
+            <a href="{{ url_for('assessment') }}" class="btn btn-primary">
+                <i class="fas fa-redo"></i> Retake Assessment
+            </a>
+            <a href="{{ url_for('careers') }}" class="btn btn-secondary">
+                <i class="fas fa-briefcase"></i> Explore All Careers
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

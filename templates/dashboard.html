@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - CareerPath{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="dashboard-section">
+    <div class="container">
+        <!-- Welcome Banner -->
+        <div class="welcome-banner">
+            <div class="banner-content">
+                <h1>Welcome, {{ user_name }}!</h1>
+                <p>Track your career exploration journey and view your recommendations</p>
+            </div>
+        </div>
+        
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-clipboard-check"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>{{ assessment_count }}</h3>
+                    <p>Assessments Completed</p>
+                </div>
+            </div>
+            
+            {% if top_career %}
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>{{ top_career[0] }}</h3>
+                    <p>Top Career Match</p>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>{{ top_career[2]|round(0)|int }}%</h3>
+                    <p>Best Match Score</p>
+                </div>
+            </div>
+            {% endif %}
+            
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-compass"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>{{ career_count|default(0) }}</h3>
+                    <p>Careers Explored</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Latest Assessment -->
+        {% if latest_assessment %}
+        <div class="latest-assessment-card">
+            <h2>Latest Assessment</h2>
+            <div class="assessment-info">
+                <div class="assessment-detail">
+                    <strong>Career:</strong> {{ latest_assessment[4] }}
+                </div>
+                <div class="assessment-detail">
+                    <strong>Match:</strong> {{ latest_assessment[3]|round(0)|int }}%
+                </div>
+                <div class="assessment-detail">
+                    <strong>Date:</strong> {{ latest_assessment[1] }}
+                </div>
+            </div>
+            <a href="{{ url_for('results', assessment_id=latest_assessment[0]) }}" class="btn btn-primary">
+                View Full Results
+            </a>
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <i class="fas fa-inbox"></i>
+            <h3>No Assessments Yet</h3>
+            <p>Take our career assessment to get personalized recommendations</p>
+        </div>
+        {% endif %}
+        
+        <!-- Action Buttons -->
+        <div class="dashboard-actions">
+            <a href="{{ url_for('assessment') }}" class="btn btn-primary btn-lg">
+                <i class="fas fa-star"></i> Take New Assessment
+            </a>
+            <a href="{{ url_for('careers') }}" class="btn btn-secondary btn-lg">
+                <i class="fas fa-briefcase"></i> Explore Careers
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

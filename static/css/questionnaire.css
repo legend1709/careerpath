@@ -1,0 +1,172 @@
+.questionnaire-section {
+    padding: 50px 20px;
+    background: var(--gradient-light);
+    min-height: 100vh;
+}
+
+.questionnaire-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.questionnaire-header h1 {
+    font-size: 36px;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 10px;
+}
+
+.questionnaire-header p {
+    color: #6b7280;
+    font-size: 16px;
+}
+
+/* ==================== PROGRESS BAR ==================== */
+
+.progress-container {
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.progress-bar {
+    height: 8px;
+    background: #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--gradient-primary);
+    width: 20%;
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    color: #6b7280;
+    font-weight: 600;
+}
+
+/* ==================== QUESTIONNAIRE FORM ==================== */
+
+.questionnaire-form {
+    max-width: 700px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 16px;
+    padding: 50px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+}
+
+.questionnaire-step {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.questionnaire-step h2 {
+    font-size: 24px;
+    color: var(--dark-color);
+    margin-bottom: 10px;
+}
+
+.section-instruction {
+    color: #6b7280;
+    margin-bottom: 30px;
+    font-size: 14px;
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+/* ==================== CHECKBOX OPTIONS ==================== */
+
+.option-checkbox {
+    cursor: pointer;
+}
+
+.option-checkbox input {
+    display: none;
+}
+
+.option-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px;
+    background: #f9fafb;
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    transition: var(--transition);
+    font-weight: 500;
+}
+
+.option-checkbox input:checked + .option-content {
+    background: var(--gradient-light);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.option-content i {
+    font-size: 24px;
+}
+
+/* ==================== NAVIGATION BUTTONS ==================== */
+
+.form-navigation {
+    display: flex;
+    gap: 15px;
+    justify-content: space-between;
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid var(--border-color);
+}
+
+.form-navigation button {
+    flex: 1;
+}
+
+@media (max-width: 768px) {
+    .questionnaire-form {
+        padding: 30px 20px;
+    }
+    
+    .questionnaire-step h2 {
+        font-size: 20px;
+    }
+    
+    .options-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .questionnaire-section {
+        padding: 20px 15px;
+    }
+    
+    .questionnaire-form {
+        padding: 20px;
+    }
+    
+    .form-navigation {
+        flex-direction: column;
+    }
+    
+    .form-navigation button {
+        width: 100%;
+    }
+}

@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard - CareerPath{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="admin-section">
+    <div class="container">
+        <h1>Admin Dashboard</h1>
+        
+        <div class="admin-stats-grid">
+            <div class="admin-stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>{{ total_users }}</h3>
+                    <p>Total Users</p>
+                    <a href="{{ url_for('admin_users') }}">View All</a>
+                </div>
+            </div>
+            
+            <div class="admin-stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>{{ total_careers }}</h3>
+                    <p>Total Careers</p>
+                    <a href="{{ url_for('admin_careers') }}">Manage</a>
+                </div>
+            </div>
+            
+            <div class="admin-stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-clipboard-check"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>{{ total_assessments }}</h3>
+                    <p>Total Assessments</p>
+                    <a href="{{ url_for('admin_assessments') }}">View</a>
+                </div>
+            </div>
+            
+            <div class="admin-stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>{{ total_recommendations }}</h3>
+                    <p>Total Recommendations</p>
+                    <a href="{{ url_for('admin_assessments') }}">View</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="admin-quick-actions">
+            <h2>Quick Actions</h2>
+            <div class="actions-grid">
+                <a href="{{ url_for('admin_users') }}" class="action-card">
+                    <i class="fas fa-users"></i>
+                    <span>View Users</span>
+                </a>
+                <a href="{{ url_for('admin_careers') }}" class="action-card">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Manage Careers</span>
+                </a>
+                <a href="{{ url_for('add_career') }}" class="action-card">
+                    <i class="fas fa-plus"></i>
+                    <span>Add Career</span>
+                </a>
+                <a href="{{ url_for('admin_assessments') }}" class="action-card">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>View Assessments</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

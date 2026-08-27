@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block title %}All Careers - CareerPath{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="careers-browse-section">
+    <div class="container">
+        <div class="careers-header">
+            <h1>Explore All Careers</h1>
+            <p>Browse through our comprehensive database of career paths</p>
+        </div>
+        
+        <!-- Search and Filter -->
+        <div class="search-filter-container">
+            <div class="search-box">
+                <input type="text" id="careerSearch" placeholder="Search careers..." class="search-input">
+                <i class="fas fa-search"></i>
+            </div>
+            
+            <div class="filter-box">
+                <select id="categoryFilter" class="filter-select">
+                    <option value="">All Categories</option>
+                    <option value="Technology">Technology</option>
+                    <option value="Analytics">Analytics</option>
+                    <option value="Security">Security</option>
+                    <option value="Infrastructure">Infrastructure</option>
+                    <option value="Design">Design</option>
+                    <option value="Gaming">Gaming</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="Business">Business</option>
+                </select>
+            </div>
+        </div>
+        
+        <!-- Careers Grid -->
+        <div class="careers-grid" id="careersGrid">
+            {% for career in careers %}
+            <div class="career-card" data-category="{{ career.category }}" data-title="{{ career.title.lower() }}">
+                <div class="career-icon">
+                    <i class="fas {{ career.icon }}"></i>
+                </div>
+                <h3>{{ career.title }}</h3>
+                <p class="career-category">{{ career.category }}</p>
+                <p class="career-description">{{ career.description[:100] }}...</p>
+                <div class="career-card-footer">
+                    <a href="{{ url_for('career_details', career_id=career.id) }}" class="btn btn-primary btn-sm">
+                        Learn More
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div id="noResults" class="empty-state" style="display:none;">
+            <i class="fas fa-search"></i>
+            <h3>No Careers Found</h3>
+            <p>Try adjusting your search or filters</p>
+        </div>
+        
+        <!-- CTA -->
+        <div class="careers-cta">
+            <h2>Ready to Find Your Perfect Career?</h2>
+            <p>Take our assessment to get personalized recommendations</p>
+            <a href="{{ url_for('assessment') }}" class="btn btn-primary btn-lg">
+                <i class="fas fa-star"></i> Start Assessment
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('careerSearch');
+    const categoryFilter = document.getElementById('categoryFilter');
+    const careersGrid = document.getElementById('careersGrid');
+    const noResults = document.getElementById('noResults');
+    
+    function filterCareers() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const selectedCategory = categoryFilter.value;
+        const cards = careersGrid.querySelectorAll('.career-card');
+        let visibleCount = 0;
+        
+        cards.forEach(card => {
+            const title = card.dataset.title;
+            const category = card.dataset.category;
+            
+            const matchesSearch = title.includes(searchTerm);
+            const matchesCategory = selectedCategory === '' || category === selectedCategory;
+            
+            if (matchesSearch && matchesCategory) {
+                card.style.display = '';
+                visibleCount++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+        
+        noResults.style.display = visibleCount === 0 ? 'flex' : 'none';
+    }
+    
+    searchInput.addEventListener('input', filterCareers);
+    categoryFilter.addEventListener('change', filterCareers);
+});
+</script>
+{% endblock %}

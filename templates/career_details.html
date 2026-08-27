@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block title %}{{ career.title }} - CareerPath{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="career-details-section">
+    <div class="container">
+        <!-- Career Header -->
+        <div class="career-hero">
+            <div class="career-icon-large">
+                <i class="fas {{ career.icon }}"></i>
+            </div>
+            <div class="career-hero-content">
+                <h1>{{ career.title }}</h1>
+                <p class="career-category-badge">{{ career.category }}</p>
+                <p class="career-intro">{{ career.description }}</p>
+            </div>
+        </div>
+        
+        <!-- Career Information Grid -->
+        <div class="career-info-grid">
+            <!-- Required Skills -->
+            <div class="info-card">
+                <div class="card-icon">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <h3>Required Skills</h3>
+                <div class="skills-list">
+                    {% for skill in career.required_skills.split(',') %}
+                    <span class="skill-tag">{{ skill.strip() }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <!-- Education -->
+            <div class="info-card">
+                <div class="card-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3>Education Required</h3>
+                <p>{{ career.education }}</p>
+            </div>
+            
+            <!-- Job Roles -->
+            <div class="info-card">
+                <div class="card-icon">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <h3>Job Roles</h3>
+                <ul class="job-roles-list">
+                    {% for role in career.job_roles.split(',') %}
+                    <li>{{ role.strip() }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            
+            <!-- Salary Range -->
+            <div class="info-card">
+                <div class="card-icon">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+                <h3>Salary Range</h3>
+                <p class="salary-text">{{ career.salary_range }}</p>
+            </div>
+            
+            <!-- Career Growth -->
+            <div class="info-card">
+                <div class="card-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Career Growth</h3>
+                <p>{{ career.growth }}</p>
+            </div>
+            
+            <!-- Category Info -->
+            <div class="info-card">
+                <div class="card-icon">
+                    <i class="fas fa-tag"></i>
+                </div>
+                <h3>Industry Category</h3>
+                <p>{{ career.category }}</p>
+            </div>
+        </div>
+        
+        <!-- Full Description -->
+        <div class="career-full-description">
+            <h2>Career Overview</h2>
+            <p>{{ career.description }}</p>
+        </div>
+        
+        <!-- Related Careers -->
+        {% if related %}
+        <div class="related-careers">
+            <h2>Related Career Paths</h2>
+            <div class="careers-grid">
+                {% for rel_career in related %}
+                <div class="career-card">
+                    <div class="career-icon">
+                        <i class="fas {{ rel_career.icon }}"></i>
+                    </div>
+                    <h3>{{ rel_career.title }}</h3>
+                    <a href="{{ url_for('career_details', career_id=rel_career.id) }}" class="btn btn-outline btn-sm">
+                        View Details
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        
+        <!-- Action Buttons -->
+        <div class="career-actions">
+            <a href="{{ url_for('assessment') }}" class="btn btn-primary btn-lg">
+                <i class="fas fa-star"></i> Take Assessment
+            </a>
+            <a href="{{ url_for('careers') }}" class="btn btn-secondary btn-lg">
+                <i class="fas fa-arrow-left"></i> Back to Careers
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

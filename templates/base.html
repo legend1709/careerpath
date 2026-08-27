@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}CareerPath - Discover the Career That Fits You{% endblock %}</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <a href="{{ url_for('index') }}" class="logo">
+                    <i class="fas fa-compass"></i> CareerPath
+                </a>
+            </div>
+            
+            <div class="navbar-menu" id="navbarMenu">
+                <div class="navbar-start">
+                    <a href="{{ url_for('index') }}" class="navbar-item">Home</a>
+                    <a href="{{ url_for('careers') }}" class="navbar-item">Careers</a>
+                    {% if session.get('user_id') %}
+                        <a href="{{ url_for('assessment') }}" class="navbar-item">Assessment</a>
+                    {% endif %}
+                </div>
+                
+                <div class="navbar-end">
+                    {% if session.get('user_id') %}
+                        {% if session.get('user_role') == 'admin' %}
+                            <a href="{{ url_for('admin_dashboard') }}" class="navbar-item">Admin</a>
+                        {% else %}
+                            <a href="{{ url_for('dashboard') }}" class="navbar-item">Dashboard</a>
+                        {% endif %}
+                        <a href="{{ url_for('logout') }}" class="navbar-item navbar-logout">Logout</a>
+                    {% else %}
+                        <a href="{{ url_for('login') }}" class="navbar-item">Login</a>
+                        <a href="{{ url_for('register') }}" class="navbar-item navbar-btn-primary">Register</a>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <button class="navbar-burger" id="navbarBurger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible" role="alert">
+                    <span>{{ message }}</span>
+                    <button type="button" class="btn-close" onclick="this.parentElement.style.display='none';">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <!-- Main Content -->
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>CareerPath</h3>
+                    <p>Discover the career that fits you perfectly.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="{{ url_for('index') }}">Home</a></li>
+                        <li><a href="{{ url_for('careers') }}">Careers</a></li>
+                        {% if session.get('user_id') %}
+                            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 CareerPath. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Main JavaScript -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
